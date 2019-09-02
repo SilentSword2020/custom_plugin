@@ -14,10 +14,6 @@ repositories {
     mavenCentral()
 }
 
-//插件的groupId和版本; artifactId:默认为moduleName
-//有生成的**.pom中可以看到
-group = 'com.android.custom.plugin.lib'
-version = '1.0'
 
 //发布到本地或远程仓库，方便当前项目或其他项目使用
 publishing {
@@ -28,6 +24,12 @@ publishing {
     }
     publications {
         maven(MavenPublication) {
+            //插件的groupId和版本; artifactId:如果不设置，默认为moduleName
+            //在生成的**.pom中可以看到
+            groupId = 'com.android.custom.plugin.lib'
+            artifactId = 'plugin'
+            version = '1.0'
+
             from components.java
         }
     }
