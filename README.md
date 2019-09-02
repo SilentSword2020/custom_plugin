@@ -5,3 +5,7 @@
 
 [官方：自定义Gradle插件](https://docs.gradle.org/current/userguide/custom_plugins.html)
 
+[官方：maven发布](https://docs.gradle.org/5.6.1/userguide/publishing_maven.html)
+
+[官方：project api doc](https://docs.gradle.org/current/javadoc/org/gradle/api/Project.html)
+
