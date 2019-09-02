@@ -1,0 +1,34 @@
+//需要依赖的插件
+plugins {
+    id 'groovy'
+    id 'maven-publish'
+    id 'maven'
+}
+
+dependencies {
+    implementation gradleApi()
+    implementation localGroovy()
+}
+
+repositories {
+    mavenCentral()
+}
+
+//插件的groupId和版本; artifactId:默认为moduleName
+//有生成的**.pom中可以看到
+group = 'com.android.custom.plugin.lib'
+version = '1.0'
+
+//发布到本地或远程仓库，方便当前项目或其他项目使用
+publishing {
+    repositories {
+        maven {
+            url = uri("$rootDir/repo")
+        }
+    }
+    publications {
+        maven(MavenPublication) {
+            from components.java
+        }
+    }
+}
