@@ -1,0 +1,54 @@
+//需要依赖的插件
+plugins {
+    id 'groovy'
+    id 'java-gradle-plugin'//new add
+    id 'maven-publish'
+    id 'maven'
+}
+
+dependencies {
+    implementation gradleApi()
+    implementation localGroovy()
+}
+
+repositories {
+    mavenCentral()
+}
+//TODO 插件相关信息
+def plugin_group_id = 'com.android.simple.plugin.lib'
+def plugin_artifact_id = 'simple_plugin'
+def plugin_version = '1.0'
+def plugin_class = 'com.android.simple.plugin.lib.SimplePlugin'
+
+//TODO 自动生成 src/resources/META_INF/gradle-plugins/xxx.properties
+//执行publish task，会生成额外的本地库文件（这个可以不用，不用处理）,
+//还是需要下面的 maven publish
+gradlePlugin {
+    plugins {
+        simplePlugin {
+            id = plugin_group_id
+            version = plugin_version
+            implementationClass = plugin_class
+        }
+    }
+}
+
+
+//发布到本地或远程仓库，方便当前项目或其他项目使用
+publishing {
+    repositories {
+        maven {
+            url = uri("$rootDir/repo")
+        }
+    }
+    publications {
+        maven(MavenPublication) {
+            //插件的groupId和版本; artifactId:如果不设置，默认为moduleName
+            //在生成的**.pom中可以看到
+            groupId = plugin_group_id
+            artifactId = plugin_artifact_id
+            version = plugin_version
+            from components.java
+        }
+    }
+}

@@ -8,6 +8,7 @@ plugins {
 dependencies {
     implementation gradleApi()
     implementation localGroovy()
+    testImplementation 'junit:junit:4.12'
 }
 
 repositories {

@@ -14,6 +14,7 @@ buildscript {
 
         //TODO 在gradle构建加入插件
         classpath 'com.android.custom.plugin.lib:plugin:1.0'
+        classpath 'com.android.simple.plugin.lib:simple_plugin:1.0'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -35,10 +36,17 @@ task clean(type: Delete) {
 //TODO 使用插件
 //通过插件id找到插件
 apply plugin: 'com.android.custom.plugin.lib'
+//TODO 使用java-gradle-plugin插件来实现 插件的路径配置
+apply plugin: 'com.android.simple.plugin.lib'
 
 //配置插件的扩展属性数据
 greeting {
     destination = "$buildDir/hello.txt"
     message = "hello world !"
     greeter = "custom plugin 1.0"
+}
+greeting_simple {
+    destination = "$buildDir/hello_simple.txt"
+    message = "hello world !"
+    greeter = "simple plugin 1.0"
 }
