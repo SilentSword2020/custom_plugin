@@ -1,4 +1,5 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+import com.android.lazy.plugin.lib.GreetingExtension
 
 buildscript {
     repositories {
@@ -15,6 +16,7 @@ buildscript {
         //TODO 在gradle构建加入插件
         classpath 'com.android.custom.plugin.lib:plugin:1.0'
         classpath 'com.android.simple.plugin.lib:simple_plugin:1.0'
+        classpath 'com.android.lazy.plugin.lib:lazy_plugin:1.0'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -38,6 +40,7 @@ task clean(type: Delete) {
 apply plugin: 'com.android.custom.plugin.lib'
 //TODO 使用java-gradle-plugin插件来实现 插件的路径配置
 apply plugin: 'com.android.simple.plugin.lib'
+apply plugin: 'com.android.lazy.plugin.lib'
 
 //配置插件的扩展属性数据
 greeting {
@@ -50,3 +53,12 @@ greeting_simple {
     message = "hello world !"
     greeter = "simple plugin 1.0"
 }
+//TODO 延迟配置，延迟创建Task
+greeting_lazy {
+    greeting = GreetingExtension.create {
+        destination "$buildDir/hello_lazy.txt"
+        message "hello world !"
+        greeter "lazy plugin 1.0"
+    }
+}
+
